@@ -1,5 +1,6 @@
 <?php
 if (!isset($step)) {
+	if (!is_dir(FRONTEND."/logs")) mkdir (FRONTEND."/logs", 0700);
 	$step = 1;
 	unset($_SESSION['structure_install'], $_SESSION['data_install'], $_SESSION['structure_modul_install'], $_SESSION['data_modul_install']);
 }
