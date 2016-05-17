@@ -1,8 +1,8 @@
 <?php
-if (!isset($step)) {
+if (!isset($_GET['step'])) {
 	$step = 1;
 	unset($_SESSION['structure_install'], $_SESSION['data_install'], $_SESSION['structure_modul_install'], $_SESSION['data_modul_install']);
-}
+} else $step = $_GET['step'];
 
 if (isset($_POST['cmt_next'])) {
 	unset($_POST['cmt_next']);
