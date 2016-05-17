@@ -16,10 +16,10 @@ if (isset($_POST['cmt_next'])) {
 			$config_ini = ";<?php return; ?>\n";
 			$config_ini .= "[CONN]\n";
 			$config_ini .= "conn[driver] = mysql\n";
-			$config_ini .= "conn[host] = ".$_POST['db_host']."\n";
-			$config_ini .= "conn[user] = ".$_POST['db_user']."\n";
-			$config_ini .= "conn[password] = ".$_POST['db_password']."\n";
-			$config_ini .= "conn[dbname] = ".$_POST['db_dbname']."\n";
+			$config_ini .= "conn[host] = '".$_POST['db_host']."'\n";
+			$config_ini .= "conn[user] = '".$_POST['db_user']."'\n";
+			$config_ini .= "conn[password] = '".$_POST['db_password']."'\n";
+			$config_ini .= "conn[dbname] = '".$_POST['db_dbname']."'\n";
 			fwrite($config_inc, $config_ini);
 			fclose($config_inc);
 			if (db_mysql_connect()){
