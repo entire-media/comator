@@ -25,7 +25,6 @@ function log_write($message) {
 			log_edit($log,$date, $message);
 		}
 	} else {
-		print $path;
 		if(mkdir($path,0777) === true){
 			log_write($message);  
 		}	
