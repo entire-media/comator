@@ -1,0 +1,117 @@
+i { display: inline-block; font-size: 0; line-height: 0; margin-left: 10px; margin-right: 10px; }
+
+/* ================================================================ *\
+	#Header
+\* ================================================================ */
+.icon-logout { background: url(../images/icons/logout-white.png) no-repeat 0 0; width: 16px; height: 16px; }
+.icon-logout:hover { background: url(../images/icons/logout-blue.png) no-repeat 0 0; }
+
+
+/* ================================================================ *\
+	#Sidebar
+\* ================================================================ */
+.icon-content { background: url(../images/icons/content-white.png) no-repeat 0 0; width: 16px; height: 16px; }
+.icon-labels { background: url(../images/icons/labels-white.png) no-repeat 0 0; width: 16px; height: 16px; }
+.icon-accounts { background: url(../images/icons/accounts-white.png) no-repeat 0 0; width: 16px; height: 16px; }
+
+.icon-tree { background: url(../images/icons/tree-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -4px; }
+.icon-close { background: url(../images/icons/close.png) no-repeat 0 0; width: 16px; height: 16px; }
+
+nav .sidebar .has-dropdown span.toggle:after { content: ''; background: url(../images/icons/toggle-white.png) no-repeat 0 0; width: 16px; height: 16px; display: inline-block; position: absolute; right: 20px; }
+
+/* ================================================================ *\
+	#Alert
+\* ================================================================ */
+
+.icon-alert-error { background: url(../images/icons/error-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-alert-success { background: url(../images/icons/success-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-alert-notify { background: url(../images/icons/error-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+
+/* ================================================================ *\
+	#Login
+\* ================================================================ */
+
+.icon-login { background: url(../images/icons/login-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+
+/* ================================================================ *\
+	#Tabs
+\* ================================================================ */
+.icon-entry { background: url(../images/icons/entry-blue.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.tabs .tab:hover .icon-entry { background: url(../images/icons/entry-white.png) no-repeat 0 0; }
+.tabs .tab.active .icon-entry { background: url(../images/icons/entry-white.png) no-repeat 0 0; }
+
+.icon-nav { background: url(../images/icons/nav-blue.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.tabs .tab:hover .icon-nav { background: url(../images/icons/nav-white.png) no-repeat 0 0; }
+.tabs .tab.active .icon-nav { background: url(../images/icons/nav-white.png) no-repeat 0 0; }
+
+.icon-templates { background: url(../images/icons/templates-blue.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.tabs .tab:hover .icon-templates { background: url(../images/icons/templates-white.png) no-repeat 0 0; }
+.tabs .tab.active .icon-templates { background: url(../images/icons/templates-white.png) no-repeat 0 0; }
+
+.icon-fields { background: url(../images/icons/fields-blue.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.tabs .tab:hover .icon-fields { background: url(../images/icons/fields-white.png) no-repeat 0 0; }
+.tabs .tab.active .icon-fields { background: url(../images/icons/fields-white.png) no-repeat 0 0; }
+
+.icon-settings { background: url(../images/icons/settings-blue.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.tabs .tab:hover .icon-settings { background: url(../images/icons/settings-white.png) no-repeat 0 0; }
+.tabs .tab.active .icon-settings { background: url(../images/icons/settings-white.png) no-repeat 0 0; }
+
+/* ================================================================ *\
+	#Filter
+\* ================================================================ */
+
+.icon-filter { background: url(../images/icons/filter-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-toggle { background: url(../images/icons/ico.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -4px; }
+.filter-title .icon-toggle { background: url(../images/icons/toggle-black.png) no-repeat 0 0; }
+.popup .icon-toggle { background: url(../images/icons/toggle-black.png) no-repeat 0 0; }
+.icon-toggle.inactive { transform: rotate(180deg); }
+
+
+/* ================================================================ *\
+	#Table
+\* ================================================================ */
+
+.icon-popup { background: url(../images/icons/edit-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-cell i{ margin-left: 5px; margin-right: 5px; }
+.icon-add { background: url(../images/icons/add-white.png) no-repeat 0 0; width: 16px; height: 16px; }
+.icon-sort { background: url(../images/icons/toggle-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -4px; }
+.icon-sort.ASC { transform: rotate(180deg); }
+.icon-edit { background: url(../images/icons/edit-black.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-edit:hover { background: url(../images/icons/edit-blue.png) no-repeat 0 0; }
+.icon-activate-active { background: url(../images/icons/activate-active-black.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-activate-active:hover { background: url(../images/icons/activate-active-blue.png) no-repeat 0 0; }
+.icon-activate { background: url(../images/icons/activate-black.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-activate:hover { background: url(../images/icons/activate-blue.png) no-repeat 0 0; }
+.icon-copy { background: url(../images/icons/copy-black.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-copy:hover { background: url(../images/icons/copy-blue.png) no-repeat 0 0; }
+.icon-delete { background: url(../images/icons/delete-black.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-delete:hover { background: url(../images/icons/delete-blue.png) no-repeat 0 0; }
+
+
+.icon-c_top { background: url(../images/icons/navi-top-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-c_right { background: url(../images/icons/navi-right-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-c_bottom { background: url(../images/icons/navi-bottom-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-c_left { background: url(../images/icons/navi-left-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-c_top_2 { background: url(../images/icons/navi-top_2-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-c_right_2 { background: url(../images/icons/navi-right_2-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-c_bottom_2 { background: url(../images/icons/navi-bottom_2-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-c_left_2 { background: url(../images/icons/navi-left_2-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+
+
+.icon-sort_order { background: url(../images/icons/sort.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -4px; }
+.title .icon-nav { background: url(../images/icons/nav-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+
+.title .icon-tree { background: url(../images/icons/tree-black.png) no-repeat 0 0; }
+.table-body .table-row:hover .icon-tree { background: url(../images/icons/tree-white.png) no-repeat 0 0; }
+
+/* ================================================================ *\
+	#Form
+\* ================================================================ */
+
+.icon-save { background: url(../images/icons/save-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+
+.icon-date { background: url(../images/icons/date-black.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-time { background: url(../images/icons/time-black.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+.icon-inputadd { background: url(../images/icons/add-black.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
+
+
