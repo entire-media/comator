@@ -124,6 +124,9 @@ function v($label){
 function init($data, $para="default", $table = NULL){
 	global $conn, $modul;
 	switch ($para){
+		case "add":
+			$return_data = init($data, $table);
+			break;
 		case "int":
 			$return_data = $data;
 			break;
@@ -141,6 +144,10 @@ function init($data, $para="default", $table = NULL){
 			if ($min < 10) $min = "0".$min;
 			if ($sec < 10) $sec = "0".$sec;
 			$return_data = $hour.":".$min.":".$sec;
+			break;
+		case "datefromto":
+			$data = explode('-', $data);
+			$return_data = date('d.m.Y - H:i', $data[0])." ".v('CMT_TO')." ".date('d.m.Y - H:i', $data[1]);
 			break;
 		case "date":
 			$return_data = date('d.m.Y - H:i', $data);

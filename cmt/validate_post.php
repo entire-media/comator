@@ -87,7 +87,7 @@ if (isset($_POST['to_year'])) {
 }
 
 if (isset($_POST['cmt_filter'])){
-	unset($_POST['cmt_filter']);
+	unset($_POST['cmt_filter'], $_SESSION['filter'][$modul]);
 	foreach ($_POST AS $key => $value){
 		$_SESSION['filter'][$modul][$key] = $value;
 	}

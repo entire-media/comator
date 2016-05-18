@@ -121,9 +121,11 @@ function select_tbody($params, $order, $filter = NULL, $group_by = NULL, $add = 
 	if (isset($add)) $sql .= $add.", ";
 	foreach ($params AS $key => $value){
 		$i++;
-		$sql.=$key;
-		if ($i != $z) $sql.=", ";
-		else $sql.=" ";
+		if ($value != 'add'){
+			$sql.=$key;
+			if ($i != $z) $sql.=", ";
+			else $sql.=" ";
+		}
 	}
 	if (!isset($params['id'])) $sql.=", id ";
 	$sql.= "FROM ".$_SESSION['TABLE_PREFIX'].$modul;
