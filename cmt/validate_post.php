@@ -96,6 +96,7 @@ if (isset($_SESSION['filter'][$modul])){
 	foreach ($_SESSION['filter'][$modul] AS $key => $value){
 		preg_match("/(.*)_q_(.*)/i", $key, $q_key);
 		preg_match("/(.*)_activate_(.*)/i", $key, $activate_key);
+		preg_match("/(.*)_option_(.*)/i", $key, $option_key);
 		if ($activate_key){
 			$$key = $value;
 			if ($activate_key[2] == 'active') $value = 1;
@@ -105,6 +106,8 @@ if (isset($_SESSION['filter'][$modul])){
 			} else {
 				$data_array['FILTER']['activate'] = "c_active = '".$value."' ";
 			}
+		} elseif ($option_key){
+			$$key = $value;
 		} elseif ($q_key) {
 			$$key = $value;
 			$q_string[$q_key[2]] = $q_key[2];

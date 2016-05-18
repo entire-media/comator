@@ -61,7 +61,8 @@ function tbody($params){
 	} else {
 		if (!isset($params['FILTER'])) $params['FILTER'] = NULL;
 		elseif (!isset($params['SORT']))  $params['SORT'] = NULL;
-		$result = db_mysql_query(select_tbody($params['TABLE'], $params['SORT'], $params['FILTER']), $conn);
+		if (!isset($params['GROUP']))  $params['GROUP'] = NULL;
+		$result = db_mysql_query(select_tbody($params['TABLE'], $params['SORT'], $params['FILTER'], $params['GROUP']), $conn);
 		
 		$sql_sub = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = '".$_SESSION['TABLE_PREFIX'].$modul."' AND COLUMN_NAME = 'sort_order' ";
 		$result_sub = db_mysql_query($sql_sub, $conn);
@@ -109,7 +110,7 @@ function tbody($params){
 	if (isset($tbody)) print $tbody;
 }
 
-function select_tbody($params, $order, $filter = NULL){
+function select_tbody($params, $order, $filter = NULL, $group_by = NULL){
 	global $modul;
 	$i = 0;
 	$z = count($params);
@@ -131,6 +132,8 @@ function select_tbody($params, $order, $filter = NULL){
 			if ($i > 0) $sql.= "AND ";
 			if ($key == 'activate'){
 				$sql.= $value;
+			} elseif ($key == 'options'){
+				$sql.= $value;
 			} elseif ($key == 'q'){
 				$sql.= "(".$value.")";
 			} elseif ($key == 'date'){
@@ -141,12 +144,15 @@ function select_tbody($params, $order, $filter = NULL){
 			$i++;
 		}
 	}
+	if (isset($group_by)){
+		$sql.= " GROUP BY ".$group_by;
+	}
 	if (count($order)){
 		$sql.= " ORDER BY ";
 		foreach ($order AS $key => $value){
 			$sql.= $key." ".$value;
 		}
-	}
+	}print $sql;
 	return $sql;
 }
 ?>

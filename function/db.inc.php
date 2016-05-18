@@ -33,7 +33,8 @@ function db_mysql_query($query, $conn){
 	try {
 		return $conn->query($query);
 	} catch(PDOException $e) {
-		db_exception_log($e->getMessage(), $query);
+		echo db_exception_log($e->getMessage(), $query);
+		die();
 	}
 }
 

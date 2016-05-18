@@ -95,11 +95,17 @@ function cross_table($title, $value = 0, $value_name = NULL, $value_label = NULL
 		unset($formdata[$title]);
 	} else {
 		if ($title == 'language') $next_modul = 'content';
-		$sql = "SELECT value, label FROM ".$_SESSION['TABLE_PREFIX'].$next_modul."_fields WHERE source_table = '".$formdata[$title]['settings']['data']."' ";
+		$sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = '".$_SESSION['TABLE_PREFIX'].$next_modul."_fields' AND COLUMN_NAME = 'id' ";
 		$result = db_mysql_query($sql, $conn);
 		if (db_mysql_num_rows($result)){
-			$arr = db_mysql_fetch_array($result);
+			
+			$sql = "SELECT value, label FROM ".$_SESSION['TABLE_PREFIX'].$next_modul."_fields WHERE source_table = '".$formdata[$title]['settings']['data']."' ";
+			$result = db_mysql_query($sql, $conn);
+			if (db_mysql_num_rows($result)){
+				$arr = db_mysql_fetch_array($result);
+			}
 		}
+		
 		if (!isset($arr['value']) OR !$arr['value']) $arr['value'] = 'id';
 		if (!isset($arr['label']) OR !$arr['label']) $arr['label'] = 'title';
 
