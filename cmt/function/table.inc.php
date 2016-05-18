@@ -84,7 +84,7 @@ function tbody($params){
 					$tbody .= "<div class='table-cell ".$key."'>".$data."</div><!-- /.table-cell -->";
 				}
 			}
-			$width = 40+26*count($params['CONSTRUCT']);
+			$width = 40+26*count(array_filter($params['CONSTRUCT']));
 			$tbody .= "<div class='table-cell tools' style='width: ".$width."px;'>";
 			foreach ($params['CONSTRUCT'] AS $key => $value){
 				if ($value===true) {
