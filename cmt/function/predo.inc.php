@@ -133,6 +133,15 @@ function init($data, $para="default", $table = NULL){
 		case "activate":
 			$return_data = $data;
 			break;
+		case "duration":
+			$hour = floor($data / 3600);
+			$min = floor(($data- ($hour * 3600)) / 60);
+			$sec = $data - ($hour * 3600) - ($min * 60);
+			if ($hour < 10) $hour = "0".$hour;
+			if ($min < 10) $min = "0".$min;
+			if ($sec < 10) $sec = "0".$sec;
+			$return_data = $hour.":".$min.":".$sec;
+			break;
 		case "date":
 			$return_data = date('d.m.Y - H:i', $data);
 			break;
