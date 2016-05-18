@@ -46,11 +46,9 @@ if (isset($_POST['levels'])){
 } else {
 	
 	foreach ($_SESSION AS $key => $val){
-		#print $key."<br>";
 		preg_match("/(.*)_level_(.*)/i", $key, $level_key);
 		if ($level_key) {
 			${$level_key[1]} = parse($_SESSION[$level_key[1]]);
-			#unset($_SESSION[$level_key[1]]);
 		}
 	}
 			
@@ -94,7 +92,6 @@ if (isset($_POST['cmt_filter'])){
 		$_SESSION['filter'][$modul][$key] = $value;
 	}
 }
-
 if (isset($_SESSION['filter'][$modul])){
 	foreach ($_SESSION['filter'][$modul] AS $key => $value){
 		preg_match("/(.*)_q_(.*)/i", $key, $q_key);
@@ -113,7 +110,7 @@ if (isset($_SESSION['filter'][$modul])){
 			$q_string[$q_key[2]] = $q_key[2];
 		} else {
 			if ($key != 'q'){
-				if ($value > '0') {
+				if ($value) {
 					$$key = $value;
 					$data_array['FILTER'][$key] = $value;
 				}

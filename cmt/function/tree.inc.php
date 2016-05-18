@@ -77,7 +77,7 @@ function tree_get_parent($table, $id){
 	return $arr['id_parent'];
 }
 
-function cross_table($title, $value = 0){
+function cross_table($title, $value = 0, $value_name = NULL, $value_label = NULL){
 	global $conn, $formdata, $modul;
 	preg_match("/(.*)_(.*)/i", $modul, $next_modul);
 	if ($next_modul)$next_modul = $next_modul[1];
@@ -102,6 +102,9 @@ function cross_table($title, $value = 0){
 		}
 		if (!isset($arr['value']) OR !$arr['value']) $arr['value'] = 'id';
 		if (!isset($arr['label']) OR !$arr['label']) $arr['label'] = 'title';
+
+		if (isset($value_name) && $value_name) $arr['value'] = $value_name;
+		if (isset($value_label) && $value_label) $arr['value'] = $value_label;
 		
 		$sql_tmp = "SELECT ".$arr['value'].", ".$arr['label'].", sort_order FROM ".$formdata[$title]['settings']['data']." WHERE c_active = '1' ";
 		if ($formdata[$title]['settings']['data'] == 'content_templates') $sql_tmp .= "GROUP BY id_template ";
