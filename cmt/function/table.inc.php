@@ -62,7 +62,8 @@ function tbody($params){
 		if (!isset($params['FILTER'])) $params['FILTER'] = NULL;
 		elseif (!isset($params['SORT']))  $params['SORT'] = NULL;
 		if (!isset($params['GROUP']))  $params['GROUP'] = NULL;
-		$result = db_mysql_query(select_tbody($params['TABLE'], $params['SORT'], $params['FILTER'], $params['GROUP']), $conn);
+		if (!isset($params['ADD']))  $params['ADD'] = NULL;
+		$result = db_mysql_query(select_tbody($params['TABLE'], $params['SORT'], $params['FILTER'], $params['GROUP'], $params['ADD']), $conn);
 		
 		$sql_sub = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = '".$_SESSION['TABLE_PREFIX'].$modul."' AND COLUMN_NAME = 'sort_order' ";
 		$result_sub = db_mysql_query($sql_sub, $conn);
@@ -110,13 +111,14 @@ function tbody($params){
 	if (isset($tbody)) print $tbody;
 }
 
-function select_tbody($params, $order, $filter = NULL, $group_by = NULL){
+function select_tbody($params, $order, $filter = NULL, $group_by = NULL, $add = NULL){
 	global $modul;
 	$i = 0;
 	$z = count($params);
 	
 	$sql = "SELECT c_active, ";
 	if ($modul == 'content_fields') $sql .= "c_default, ";
+	if (isset($add)) $sql .= $add.", ";
 	foreach ($params AS $key => $value){
 		$i++;
 		$sql.=$key;
