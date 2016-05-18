@@ -23,6 +23,14 @@ if (isset($structure_install) && $structure_install == true){
 	
 	db_mysql_query($structure, $conn);
 	
+	$indizies = "ALTER TABLE `content_templates`
+  ADD PRIMARY KEY (`id`);";
+	db_mysql_query($indizies, $conn);
+	
+	$increment = "ALTER TABLE `content_templates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;";
+	db_mysql_query($increment, $conn);
+	
 	$structure = "CREATE TABLE IF NOT EXISTS `id_template` (
   `id` int(11) NOT NULL,
   `date` int(11) NOT NULL,
@@ -33,11 +41,11 @@ if (isset($structure_install) && $structure_install == true){
 
 	db_mysql_query($structure, $conn);
 	
-	$indizies = "ALTER TABLE `content_templates`
+	$indizies = "ALTER TABLE `id_template`
   ADD PRIMARY KEY (`id`);";
 	db_mysql_query($indizies, $conn);
 	
-	$increment = "ALTER TABLE `content_templates`
+	$increment = "ALTER TABLE `id_template`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;";
 	db_mysql_query($increment, $conn);
 	
