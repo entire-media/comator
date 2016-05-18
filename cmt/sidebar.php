@@ -38,18 +38,25 @@ if ($id_parent){
 	}
 }
 
-//print "
-//	<li>
-//		<a href='?modul=gallery'>
-//			<i class='icon-gallery'></i><span>".v('CMT_MODUL_GALLERY')."</span>
-//		</a>
-//	</li>";
+$sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = '".$_SESSION['TABLE_PREFIX']."labels' AND COLUMN_NAME = 'id' ";
+$result = db_mysql_query($sql, $conn);
+if (db_mysql_num_rows($result)){
+	print "
+		<li>
+			<a href='?modul=labels'>
+				<i class='icon-labels'></i><span>".v('CMT_MODUL_LABELS')."</span>
+			</a>
+		</li>";
+} else {
+	print "
+		<li>
+			<a href='?modul=cmt_labels'>
+				<i class='icon-labels'></i><span>".v('CMT_MODUL_LABELS')."</span>
+			</a>
+		</li>";
+}
+
 print "
-	<li>
-		<a href='?modul=labels'>
-			<i class='icon-labels'></i><span>".v('CMT_MODUL_LABELS')."</span>
-		</a>
-	</li>
 	<li>
 		<a href='?modul=cmt_accounts'>
 			<i class='icon-accounts'></i>".v('CMT_MODUL_ACCOUNTS')."
