@@ -152,7 +152,7 @@ function select_tbody($params, $order, $filter = NULL, $group_by = NULL){
 		foreach ($order AS $key => $value){
 			$sql.= $key." ".$value;
 		}
-	}print $sql;
+	}
 	return $sql;
 }
 ?>
