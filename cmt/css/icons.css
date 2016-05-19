@@ -74,6 +74,7 @@ nav .sidebar .has-dropdown span.toggle:after { content: ''; background: url(../i
 .icon-popup { background: url(../images/icons/edit-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }
 .icon-cell i{ margin-left: 5px; margin-right: 5px; }
 .icon-add { background: url(../images/icons/add-white.png) no-repeat 0 0; width: 16px; height: 16px; }
+.icon-export { background: url(../images/icons/export-white.png) no-repeat 0 0; width: 16px; height: 16px; }
 .icon-sort { background: url(../images/icons/toggle-white.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -4px; }
 .icon-sort.ASC { transform: rotate(180deg); }
 .icon-edit { background: url(../images/icons/edit-black.png) no-repeat 0 0; width: 16px; height: 16px; margin-bottom: -2px; }

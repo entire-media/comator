@@ -244,11 +244,10 @@ main { margin-right: 20px; padding-top: 20px;}
 .cmt_labels .table-cell.content,
 .labels .table-cell.content { width: auto; }
 
-.engine-function { float: right; display: block; margin-top: 20px; }
-.engine-function a { width: 33px; height: 33px; display: inline-block; border: 1px solid #222933; }
+.engine-function { float: right; display: block; margin-top: 20px; padding-left: 20px; }
+.engine-function a { width: 33px; height: 33px; display: inline-block; border: 1px solid #222933; background-color: #222933;}
 .engine-function a i { margin-top: 8px; margin-left: 8px; }
 
-.engine-function a.add { background-color: #222933; } 
 .engine-function a:hover { background-color: #0099cc; border: 1px solid #0099cc; }
 
 .table-cell .spacer { width: 16px; height: 16px; float: left; margin-left: 10px; }

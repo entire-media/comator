@@ -1,7 +1,7 @@
 <?php
 	
 function thead($params){
-	global $modul, $direction, $order;
+	global $modul, $direction, $order, $data_array;
 	if ($modul == 'id_template') {
 		$modul_old = 'id_template';
 		$modul = 'content_templates';
@@ -39,9 +39,8 @@ function thead($params){
 				$thead .= "'></i></a></div><!-- /.table-cell -->";
 			}		
 		}
-		$thead .= "
-		<div class='table-cell tools'></div><!-- /.table-cell -->
-		</div><!-- /.table-row -->
+		if (count(array_filter($data_array['CONSTRUCT'])) > 0) $thead .= "<div class='table-cell tools'></div><!-- /.table-cell -->";
+		$thead .= "</div><!-- /.table-row -->
 	</div><!-- /.table-head -->";
 	
 	if (isset($modul_old)) $modul = $modul_old;
@@ -86,24 +85,26 @@ function tbody($params){
 					$tbody .= "<div class='table-cell ".$key."'>".$data."</div><!-- /.table-cell -->";
 				}
 			}
-			$width = 40+26*count(array_filter($params['CONSTRUCT']));
-			$tbody .= "<div class='table-cell tools' style='width: ".$width."px;'>";
-			foreach ($params['CONSTRUCT'] AS $key => $value){
-				if ($value===true) {
-					if ($key == 'activate'){
-						if (!isset($arr['c_default']) OR $arr['c_default'] == 0){
-							if ($arr['c_active']) $tbody .= "<a href='#' class='icon-cell de".$key."' data-content='".$modul."' id='".$arr['id']."' ><i class='icon-".$key."-active'></i>";
-							else $tbody .= "<a href='#' class='icon-cell ".$key."' data-content='".$modul."' id='".$arr['id']."' ><i class='icon-".$key."'></i>";
-							$tbody .= "</a>";
+			if (count(array_filter($params['CONSTRUCT']))){
+				$width = 40+26*count(array_filter($params['CONSTRUCT']));
+				$tbody .= "<div class='table-cell tools' style='width: ".$width."px;'>";
+				foreach ($params['CONSTRUCT'] AS $key => $value){
+					if ($value===true) {
+						if ($key == 'activate'){
+							if (!isset($arr['c_default']) OR $arr['c_default'] == 0){
+								if ($arr['c_active']) $tbody .= "<a href='#' class='icon-cell de".$key."' data-content='".$modul."' id='".$arr['id']."' ><i class='icon-".$key."-active'></i>";
+								else $tbody .= "<a href='#' class='icon-cell ".$key."' data-content='".$modul."' id='".$arr['id']."' ><i class='icon-".$key."'></i>";
+								$tbody .= "</a>";
+							}
+						} elseif ($key == 'delete'){
+							if (!isset($arr['c_default']) OR $arr['c_default'] == 0) $tbody .= "<a href='#' class='icon-cell ".$key."' data-content='".$modul."' id='".$arr['id']."' ><i class='icon-".$key."'></i></a>";
+						} else {
+							$tbody .= "<a href='#' class='icon-cell ".$key."' data-content='".$modul."' id='".$arr['id']."' ><i class='icon-".$key."'></i></a>";
 						}
-					} elseif ($key == 'delete'){
-						if (!isset($arr['c_default']) OR $arr['c_default'] == 0) $tbody .= "<a href='#' class='icon-cell ".$key."' data-content='".$modul."' id='".$arr['id']."' ><i class='icon-".$key."'></i></a>";
-					} else {
-						$tbody .= "<a href='#' class='icon-cell ".$key."' data-content='".$modul."' id='".$arr['id']."' ><i class='icon-".$key."'></i></a>";
 					}
 				}
+				$tbody .= "</div><!-- /.table-cell -->";
 			}
-			$tbody .= "</div><!-- /.table-cell -->";
 			$tbody .= "</div><!-- /.table-row -->";
 		}
 		$tbody .= "</div><!-- /.table-body -->";
