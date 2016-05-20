@@ -87,6 +87,10 @@ if (isset($_POST['to_year'])) {
 }
 
 if (isset($_POST['cmt_filter'])){
+	if ($_POST['cmt_filter'] == 'export') {
+		$start_export = true;
+		csv_header(strtoupper($modul));
+	}
 	unset($_POST['cmt_filter'], $_SESSION['filter'][$modul]);
 	foreach ($_POST AS $key => $value){
 		$_SESSION['filter'][$modul][$key] = $value;

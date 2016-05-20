@@ -163,4 +163,11 @@ function check_duplicate($val, $key = 'title'){
 	else return false;
 }
 
+function csv_header($filename){
+	header("Content-Disposition: attachment; filename=".$filename."-".date('d.m.Y-H:i', time()).".CSV");
+  header("Content-Type: application/force-download");
+  header("Content-Type: application/octet-stream");
+  header("Content-Type: application/download");
+	header("Content-Type: text/csv");
+}
 ?>

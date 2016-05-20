@@ -25,6 +25,13 @@
 			popup('add_'+$(this).attr('data-content'), 'index.php?modul='+$(this).attr('data-content')+'&popup=1&action=add');
 		});
 		
+		$(".export").click(function(event){
+			event.preventDefault();
+	  	$("button[name='cmt_filter']").val('export');
+	  	$("button[name='cmt_filter']").click();
+	  	$("button[name='cmt_filter']").val('');
+		});
+		
 		$(".edit").click(function(event){
 			event.preventDefault();
 			popup($(this).attr('id'), 'index.php?modul='+$(this).attr('data-content')+'&id='+$(this).attr('id')+'&popup=1&action=edit');

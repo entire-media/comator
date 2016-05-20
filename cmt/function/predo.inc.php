@@ -22,6 +22,7 @@ function load_cmt_scripts(){
 	require_once BACKEND.'function/table.inc.php';
 	
 	require_once BACKEND.'function/sort_order.inc.php';
+	require_once BACKEND.'function/chart.inc.php';
 }
 
 ##### LOGIN USER #####
@@ -127,6 +128,9 @@ function init($data, $para="default", $table = NULL){
 		case "add":
 			$return_data = init($data, $table);
 			break;
+		case "number":
+			$return_data = number_format($data, 0, ",", ".");
+			break;
 		case "int":
 			$return_data = $data;
 			break;
@@ -185,7 +189,8 @@ function init($data, $para="default", $table = NULL){
 			break;
 		case "default":
 		default:
-			$return_data = $data;
+			if (is_numeric($data)) $return_data = init($data, 'number');
+			else $return_data = $data;
 			break;
 	}
 	return $return_data;

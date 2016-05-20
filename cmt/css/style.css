@@ -231,8 +231,10 @@ main { margin-right: 20px; padding-top: 20px;}
 .table-body .table-row:hover { color: #0099cc; }
 
 .table-cell.date { width: 135px; }
+.table-cell.datefromto { width: 265px; }
 .table-cell.title { width: auto; }
 .table-cell.username { width: auto; }
+.table-cell.id_mount_point { width: auto; }
 .table-cell.sort_order { width: 83px; }
 .table-cell.sort_order a { padding-left: 15px; padding-right: 15px; }
 .table-cell.icon-only { width: 57px; }
@@ -308,3 +310,26 @@ select.year { width: 82px; }
 
 button { background-color: #222933; color: #ffffff; display: block; padding: 10px 20px 10px 10px; }
 button:hover { background-color: #0099cc; }
+
+/* ================================================================ *\
+	#Chart
+\* ================================================================ */
+
+.chart-wrapper { padding-top: 40px; width: 100%; position:relative; }
+.chart-wrapper sv { position: absolute; }
+.chart .grid { stroke: #000000; stroke-dasharray: 0; stroke-width: 1; }
+.chart .chart-label { font-size: 14px; font-weight: bold; }
+.chart .chart_line { fill: none; stroke-width : 2; }
+.chart .data { stroke-width: 2; }
+
+.chart .chart_line.color-1 { stroke: #0099cc; }
+.chart .data.color-1 { fill: #0099cc; }
+.chart .chart_line.color-2 { stroke: #ff0000; }
+.chart .data.color-2 { fill: #ff0000; }
+
+ul.legend { list-style: none; font-weight: bold; font-size: 16px; }
+ul.legend li { display: inline; float: left; }
+ul.legend li + li { margin-left: 20px; }
+ul.legend .color-box { width: 20px; height: 20px; border: 1px solid #000000; display: block; float: left; margin-right: 5px; }
+ul.legend .color-box.color-1 { background-color: #0099cc; }
+ul.legend .color-box.color-2 { background-color: #ff0000; }

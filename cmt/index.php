@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors','1');
 session_start();
-setlocale (LC_ALL, 'de_DE');
+setlocale (LC_ALL, 'en_US');
 header('Content-Type: text/html; charset=utf-8');
 
 
@@ -81,6 +81,10 @@ require_once BACKEND.'default_session.php';
 do_delete();
 do_c_active();
 
+if (isset($start_export) && $start_export === true){
+	if (is_file(BACKEND.'export/export_'.$modul.'.php')) require_once BACKEND.'export/export_'.$modul.'.php';
+	die();
+}
 ?>
 <!doctype html>
 <html lang="de">
