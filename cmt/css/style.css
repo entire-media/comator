@@ -276,7 +276,7 @@ label { display: inline-block; }
 
 .free_space { float: left; margin-right: 10px; }
 
-.form_element { margin-top: 20px; }
+.form_element { padding-top: 20px; }
 
 input,
 select { width: 758px; border: 1px solid #dddddd; height: 32px; margin-left: 10px; background-color: #ffffff; padding-left: 9px; padding-right: 9px; }
