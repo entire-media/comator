@@ -1,7 +1,5 @@
 <?php
 
-require_once BACKEND.'modul_head/content.php';
-
 if (isset($id_tree)) {
 	if ($id_tree > '0')	$data_array['FILTER']['id_tree'] = $id_tree;
 }

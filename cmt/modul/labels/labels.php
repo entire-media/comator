@@ -1,9 +1,5 @@
 <?php
 
-require_once BACKEND.'modul_head/labels.php';
-
-$formdata = NULL;
-
 $formdata['q'] = array	(
 	'type'				=>	'text',
 	'label'				=>	v('CMT_SEARCH')

@@ -1,7 +1,5 @@
 <?php
 
-require_once BACKEND.'modul_head/content.php';
-
 $formdata['id_template'] = array	(
 	'type'				=>	'select',
 	'label'				=>	v('CMT_TEMPLATE'),

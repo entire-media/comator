@@ -143,6 +143,7 @@ if (isset($start_export) && $start_export === true){
 						if (!isset($date) OR $action == 'copy') $date = time();
 						include('modul/'.$path.'/engine_'.$modul.'.php');
 					} else {
+						include('modul/'.$path.'/head_'.$path.'.php');
 						include('modul/'.$path.'/'.$modul.'.php');
 					}
 				} else {
