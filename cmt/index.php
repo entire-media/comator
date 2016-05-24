@@ -116,7 +116,12 @@ if (isset($start_export) && $start_export === true){
 				}
 			?>
 			<main>
-			<?php 
+			<?php
+				preg_match("/(.*)_(.*)/i", $modul, $path);
+				if ($path){
+					if ($path[1] == 'cmt') $path = $path[2];
+					else $path = $path[1];
+				}	else $path = $modul;
 				if (file_exists(BACKEND."/setup.php")){
 					include('setup.php');
 				} elseif (isset($_SESSION['cmt_login']) && $_SESSION['cmt_login'] === true){
@@ -136,9 +141,9 @@ if (isset($start_export) && $start_export === true){
 							}
 						}
 						if (!isset($date) OR $action == 'copy') $date = time();
-						include('modul/engine_'.$modul.'.php');
+						include('modul/'.$path.'/engine_'.$modul.'.php');
 					} else {
-						include('modul/'.$modul.'.php');
+						include('modul/'.$path.'/'.$modul.'.php');
 					}
 				} else {
 					include('login.php');
