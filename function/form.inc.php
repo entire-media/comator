@@ -112,7 +112,7 @@ function print_form ($formdata) {
 				</div>";
 				if (isset($data['settings']['alert'])) {
 					if (is_array($data['settings']['alert'])) {
-						if ($data['settings']['alert']['text']) print print_alert($data['settings']['alert']['type'], $data['settings']['alert']['label'], $data['settings']['alert']['text']);
+						if (isset($data['settings']['alert']['text'])) print print_alert($data['settings']['alert']['type'], $data['settings']['alert']['label'], $data['settings']['alert']['text']);
 						else print print_alert($data['settings']['alert']['type'], v('CMT_HEADLINE_'.$data['settings']['alert']['label'].'_ERROR'), v('CMT_TEXT_'.$data['settings']['alert']['label'].'_ERROR'));
 					} else {
 						print print_alert($data['settings']['alert'], v('CMT_HEADLINE_REQUIRED_ERROR'), v('CMT_TEXT_REQUIRED_ERROR'));
