@@ -48,7 +48,8 @@ function thead($params){
 }
 
 function tbody($params){
-	global $conn, $modul;
+	global $conn, $modul, $sub_page;
+	if (!isset($sub_page) OR $sub_page == 0) $sub_page = 1;
 	if ($modul == 'content_tree'){
 		if (isset($params['FILTER'])) $arr_tmp = create_tree('content_tree', 0, $params['FILTER']);
 		else $arr_tmp = create_tree('content_tree', 0);
@@ -64,13 +65,15 @@ function tbody($params){
 		if (!isset($params['ADD']))  $params['ADD'] = NULL;
 		$result = db_mysql_query(select_tbody($params['TABLE'], $params['SORT'], $params['FILTER'], $params['GROUP'], $params['ADD']), $conn);
 		
-		$sql_sub = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = '".$_SESSION['TABLE_PREFIX'].$modul."' AND COLUMN_NAME = 'sort_order' ";
-		$result_sub = db_mysql_query($sql_sub, $conn);
-		if ($modul == 'content_tree'){
-			 $tbody = "<div class='table-body tree'>";
-		} else {
-			if (db_mysql_num_rows($result_sub)) $tbody = "<div class='table-body sortable'>";
-			else $tbody = "<div class='table-body ".$modul."'>";
+		if ($sub_page <= 1){
+			$sql_sub = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = '".$_SESSION['TABLE_PREFIX'].$modul."' AND COLUMN_NAME = 'sort_order' ";
+			$result_sub = db_mysql_query($sql_sub, $conn);
+			if ($modul == 'content_tree'){
+				 $tbody = "<div class='table-body tree'>";
+			} else {
+				if (db_mysql_num_rows($result_sub)) $tbody = "<div class='table-body sortable'>";
+				else $tbody = "<div class='table-body ".$modul."'>";
+			}
 		}
 		while($arr=db_mysql_fetch_array($result)){
 			$tbody .= "<div class='table-row' id='".$arr['id']."' >";
@@ -107,13 +110,19 @@ function tbody($params){
 			}
 			$tbody .= "</div><!-- /.table-row -->";
 		}
+		$next_page = $sub_page+1;
+		$tbody .= "<form id='next_rows' method='POST'>";
+		$tbody .= "<input type='hidden' name='modul' value='".$modul."'>";
+		$tbody .= "<input type='hidden' name='params' value='".serialize($params)."'>";
+		$tbody .= "<input type='hidden' name='sub_page' value='".$next_page."'>";
+		$tbody .= "</form>";
 		$tbody .= "</div><!-- /.table-body -->";
 	}
 	if (isset($tbody)) print $tbody;
 }
 
 function select_tbody($params, $order, $filter = NULL, $group_by = NULL, $add = NULL){
-	global $modul;
+	global $modul, $conn, $sub_page;
 	$i = 0;
 	$z = count($params);
 	
@@ -158,6 +167,15 @@ function select_tbody($params, $order, $filter = NULL, $group_by = NULL, $add = 
 			$sql.= $key." ".$value;
 		}
 	}
+	$save_sql = $sql;
+	$sql = "SELECT count(*) AS number FROM (".$sql.") AS number";
+	$result = db_mysql_query($sql, $conn);
+	$arr_count = db_mysql_fetch_array($result);
+	$count = $arr_count['number'];
+	$start = $sub_page * 100 - 100;
+	$pages = $count / 100;
+	$sql = $save_sql;
+	$sql.=" LIMIT ".$start.", 100";
 	return $sql;
 }
 ?>

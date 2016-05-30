@@ -5,6 +5,29 @@
 	
 	$doc.ready(function() {
 		
+		var $load = false;
+		
+		if ($('#next_rows').length != 0){
+			$(window).scroll(function() {
+				if($(window).scrollTop() >= $('#next_rows').offset().top + $('#next_rows').height()-1500) {
+					if ($load === false) load_now();
+				}
+			});
+		}
+		
+		function load_now(){
+			$load = true;
+			if ($('#next_rows').length != 0){
+				$.post('lib/js_functions.php', $('#next_rows').serialize(), function(data){
+					$('#next_rows').remove();
+					var $data = $(data);
+					$('.table-body').append($data);
+					tools();
+					$load = false;
+				});
+			}
+		}
+		
 		if ($('#update_parent').val()) window.opener.location.reload();
 		
 		$('input[type=file]').change(function() { 
@@ -20,60 +43,65 @@
 			});
 		}
 		
-		$(".add").click(function(event){
-			event.preventDefault();
-			popup('add_'+$(this).attr('data-content'), 'index.php?modul='+$(this).attr('data-content')+'&popup=1&action=add');
-		});
+		tools();
 		
-		$(".export").click(function(event){
-			event.preventDefault();
-	  	$("button[name='cmt_filter']").val('export');
-	  	$("button[name='cmt_filter']").click();
-	  	$("button[name='cmt_filter']").val('');
-		});
+		function tools(){
 		
-		$(".edit").click(function(event){
-			event.preventDefault();
-			popup($(this).attr('id'), 'index.php?modul='+$(this).attr('data-content')+'&id='+$(this).attr('id')+'&popup=1&action=edit');
-		});
-		
-		$(".copy").click(function(event){
-			event.preventDefault();
-			popup($(this).attr('id'), 'index.php?modul='+$(this).attr('data-content')+'&id='+$(this).attr('id')+'&popup=1&action=copy');
-		});
-		
-		$(".delete").click(function(event){
-			event.preventDefault();
-			confirm_delete = confirm(unescape('Wollen Sie den Eintrag wirklich l%F6schen?'));
-			if (confirm_delete == true) {
-				$.post("index.php", { delete: $(this).attr('id'), modul: $(this).attr('data-content')}, function(data){
-					location.reload();
-				});
-			}
-		});
-		
-		$(".icon-cell").click(function(event){
-			event.preventDefault();
-			var $val = $(this).attr('class');
-			$val = $val.replace('icon-cell', '');
-			$val = $val.replace(' ', '');
-			if ($val.match(/activate/i)){
-				location = 'index.php?modul='+$(this).attr('data-content')+'&activate='+$(this).attr('id')+'&action='+$val.replace('_activate','');
-			}
-			if ($val.match(/deactivate/i)){
-				location = 'index.php?modul='+$(this).attr('data-content')+'&deactivate='+$(this).attr('id')+'&action='+$val.replace('_deactivate','');
-			}
-		});
-		
-		$(".activate").click(function(event){
-			event.preventDefault();
-			location = 'index.php?modul='+$(this).attr('data-content')+'&activate='+$(this).attr('id');
-		});
-		
-		$(".deactivate").click(function(event){
-			event.preventDefault();
-			location = 'index.php?modul='+$(this).attr('data-content')+'&deactivate='+$(this).attr('id');
-		});
+			$(".add").click(function(event){
+				event.preventDefault();
+				popup('add_'+$(this).attr('data-content'), 'index.php?modul='+$(this).attr('data-content')+'&popup=1&action=add');
+			});
+			
+			$(".export").click(function(event){
+				event.preventDefault();
+		  	$("button[name='cmt_filter']").val('export');
+		  	$("button[name='cmt_filter']").click();
+		  	$("button[name='cmt_filter']").val('');
+			});
+			
+			$(".edit").click(function(event){
+				event.preventDefault();
+				popup($(this).attr('id'), 'index.php?modul='+$(this).attr('data-content')+'&id='+$(this).attr('id')+'&popup=1&action=edit');
+			});
+			
+			$(".copy").click(function(event){
+				event.preventDefault();
+				popup($(this).attr('id'), 'index.php?modul='+$(this).attr('data-content')+'&id='+$(this).attr('id')+'&popup=1&action=copy');
+			});
+			
+			$(".delete").click(function(event){
+				event.preventDefault();
+				confirm_delete = confirm(unescape('Wollen Sie den Eintrag wirklich l%F6schen?'));
+				if (confirm_delete == true) {
+					$.post("index.php", { delete: $(this).attr('id'), modul: $(this).attr('data-content')}, function(data){
+						location.reload();
+					});
+				}
+			});
+			
+			$(".icon-cell").click(function(event){
+				event.preventDefault();
+				var $val = $(this).attr('class');
+				$val = $val.replace('icon-cell', '');
+				$val = $val.replace(' ', '');
+				if ($val.match(/activate/i)){
+					location = 'index.php?modul='+$(this).attr('data-content')+'&activate='+$(this).attr('id')+'&action='+$val.replace('_activate','');
+				}
+				if ($val.match(/deactivate/i)){
+					location = 'index.php?modul='+$(this).attr('data-content')+'&deactivate='+$(this).attr('id')+'&action='+$val.replace('_deactivate','');
+				}
+			});
+			
+			$(".activate").click(function(event){
+				event.preventDefault();
+				location = 'index.php?modul='+$(this).attr('data-content')+'&activate='+$(this).attr('id');
+			});
+			
+			$(".deactivate").click(function(event){
+				event.preventDefault();
+				location = 'index.php?modul='+$(this).attr('data-content')+'&deactivate='+$(this).attr('id');
+			});
+		}
 		
 		function popup(name,url){
 			this.name='edit_'+name;

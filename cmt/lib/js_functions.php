@@ -49,4 +49,10 @@ if (isset($_GET['form_inputadd'])){
 	print_form ($formdata);
 	unset($formdata);
 }
+
+if (isset($_POST['sub_page'])){
+	if (isset($_POST['modul'])) $modul = parse($_POST['modul'], 'string');
+	if (isset($_POST['sub_page'])) $sub_page = parse($_POST['sub_page'], 'int');
+	tbody(unserialize($_POST['params']));
+}
 ?>
