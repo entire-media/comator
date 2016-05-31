@@ -198,10 +198,10 @@ main { margin-right: 20px; padding-top: 20px;}
 
 .filter .hidden { display: none; }
 
-.filter-form .form .multi_checkbox { display: inline-block; margin-left: 260px; }
+.filter-form .form .multi_checkbox { display: inline-block; margin-left: 250px; }
 .filter-form .form .multi_checkbox .form_field_label { margin-left: -250px; }
 .filter-form .form .multi_checkbox + .multi_checkbox { margin-left: 0; }
-.filter-form .form .multi_checkbox:nth-child(4n+6) { margin-left: 260px; }
+.filter-form .form .multi_checkbox:nth-child(4n+6) { margin-left: 250px; }
 
 /* ================================================================ *\
 	#Table

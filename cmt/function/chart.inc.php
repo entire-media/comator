@@ -86,38 +86,43 @@ function print_chart($params, $line, $option = NULL, $select = 0){
 	$count = db_mysql_num_rows($result);
 	while($arr = db_mysql_fetch_array($result)){
 		if ($arr[$line['VAL']] >= $max) $max = $arr[$line['VAL']];
-		$date = explode('-', $arr['datefromto']);
-		if ($option == 'hour'){
-			array_push($base_arr, date('H', $date[0]));
-			$data_arr[$arr[$line['KEY']]][date('H', $date[0])] = $arr[$line['VAL']];
-			if ($count == 1) {
-				array_unshift($base_arr, date('H' , strtotime('-1 hour', $date[0])));
-				array_push($base_arr, date('H' , strtotime('+1 hour', $date[0])));
+		if ($line['DATA'] == 'date'){
+			$date = explode('-', $arr['datefromto']);
+			if ($option == 'hour'){
+				array_push($base_arr, date('H', $date[0]));
+				$data_arr[$arr[$line['KEY']]][date('H', $date[0])] = $arr[$line['VAL']];
+				if ($count == 1) {
+					array_unshift($base_arr, date('H' , strtotime('-1 hour', $date[0])));
+					array_push($base_arr, date('H' , strtotime('+1 hour', $date[0])));
+				}
 			}
-		}
-		if ($option == 'day'){
-			array_push($base_arr, date('d.m', $date[0]));
-			$data_arr[$arr[$line['KEY']]][date('d.m', $date[0])] = $arr[$line['VAL']];
-			if ($count == 1) {
-				array_unshift($base_arr, date('d.m' , strtotime('-1 day', $date[0])));
-				array_push($base_arr, date('d.m' , strtotime('+1 day', $date[0])));
+			if ($option == 'day'){
+				array_push($base_arr, date('d.m', $date[0]));
+				$data_arr[$arr[$line['KEY']]][date('d.m', $date[0])] = $arr[$line['VAL']];
+				if ($count == 1) {
+					array_unshift($base_arr, date('d.m' , strtotime('-1 day', $date[0])));
+					array_push($base_arr, date('d.m' , strtotime('+1 day', $date[0])));
+				}
 			}
-		}
-		if ($option == 'month'){
-			array_push($base_arr, date('F', $date[0]));
-			$data_arr[$arr[$line['KEY']]][date('F', $date[0])] = $arr[$line['VAL']];
-			if ($count == 1) {
-				array_unshift($base_arr, date('F' , strtotime('-1 month', $date[0])));
-				array_push($base_arr, date('F' , strtotime('+1 month', $date[0])));
+			if ($option == 'month'){
+				array_push($base_arr, date('F', $date[0]));
+				$data_arr[$arr[$line['KEY']]][date('F', $date[0])] = $arr[$line['VAL']];
+				if ($count == 1) {
+					array_unshift($base_arr, date('F' , strtotime('-1 month', $date[0])));
+					array_push($base_arr, date('F' , strtotime('+1 month', $date[0])));
+				}
 			}
-		}
-		if ($option == 'year'){
-			array_push($base_arr, date('Y', $date[0]));
-			$data_arr[$arr[$line['KEY']]][date('Y', $date[0])] = $arr[$line['VAL']];
-			if ($count == 1) {
-				array_unshift($base_arr, date('Y' , strtotime('-1 year', $date[0])));
-				array_push($base_arr, date('Y' , strtotime('+1 year', $date[0])));
+			if ($option == 'year'){
+				array_push($base_arr, date('Y', $date[0]));
+				$data_arr[$arr[$line['KEY']]][date('Y', $date[0])] = $arr[$line['VAL']];
+				if ($count == 1) {
+					array_unshift($base_arr, date('Y' , strtotime('-1 year', $date[0])));
+					array_push($base_arr, date('Y' , strtotime('+1 year', $date[0])));
+				}
 			}
+		} else {
+			array_push($base_arr, $arr[$line['DATA']]);
+			$data_arr[$arr[$line['KEY']]][$arr[$line['DATA']]] = $arr[$line['VAL']];
 		}
 	}
 	foreach ($data_arr AS $key => $value){
