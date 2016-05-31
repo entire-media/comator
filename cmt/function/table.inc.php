@@ -109,14 +109,14 @@ function tbody($params){
 				$tbody .= "</div><!-- /.table-cell -->";
 			}
 			$tbody .= "</div><!-- /.table-row -->";
+			$next_page = $sub_page+1;
+			$tbody .= "<form id='next_rows' method='POST'>";
+			$tbody .= "<input type='hidden' name='modul' value='".$modul."'>";
+			$tbody .= "<input type='hidden' name='params' value='".serialize($params)."'>";
+			$tbody .= "<input type='hidden' name='sub_page' value='".$next_page."'>";
+			$tbody .= "</form>";
+			$tbody .= "</div><!-- /.table-body -->";
 		}
-		$next_page = $sub_page+1;
-		$tbody .= "<form id='next_rows' method='POST'>";
-		$tbody .= "<input type='hidden' name='modul' value='".$modul."'>";
-		$tbody .= "<input type='hidden' name='params' value='".serialize($params)."'>";
-		$tbody .= "<input type='hidden' name='sub_page' value='".$next_page."'>";
-		$tbody .= "</form>";
-		$tbody .= "</div><!-- /.table-body -->";
 	}
 	if (isset($tbody)) print $tbody;
 }
