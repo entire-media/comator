@@ -63,7 +63,7 @@ function tbody($params){
 		elseif (!isset($params['SORT']))  $params['SORT'] = NULL;
 		if (!isset($params['GROUP']))  $params['GROUP'] = NULL;
 		if (!isset($params['ADD']))  $params['ADD'] = NULL;
-		$result = db_mysql_query(select_tbody($params['TABLE'], $params['SORT'], $params['FILTER'], $params['GROUP'], $params['ADD']), $conn);
+		$result = db_mysql_query(select_tbody($params['TABLE'], $params['SORT'], $params['FILTER'], $params['GROUP'], $params['ADD'], 100), $conn);
 		
 		if ($sub_page <= 1){
 			$sql_sub = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = '".$_SESSION['TABLE_PREFIX'].$modul."' AND COLUMN_NAME = 'sort_order' ";
@@ -121,7 +121,7 @@ function tbody($params){
 	if (isset($tbody)) print $tbody;
 }
 
-function select_tbody($params, $order, $filter = NULL, $group_by = NULL, $add = NULL){
+function select_tbody($params, $order, $filter = NULL, $group_by = NULL, $add = NULL, $limit = NULL){
 	global $modul, $conn, $sub_page;
 	$i = 0;
 	$z = count($params);
@@ -167,15 +167,17 @@ function select_tbody($params, $order, $filter = NULL, $group_by = NULL, $add = 
 			$sql.= $key." ".$value;
 		}
 	}
-	$save_sql = $sql;
-	$sql = "SELECT count(*) AS number FROM (".$sql.") AS number";
-	$result = db_mysql_query($sql, $conn);
-	$arr_count = db_mysql_fetch_array($result);
-	$count = $arr_count['number'];
-	$start = $sub_page * 100 - 100;
-	$pages = $count / 100;
-	$sql = $save_sql;
-	$sql.=" LIMIT ".$start.", 100";
+	if (isset($limit)){
+		$save_sql = $sql;
+		$sql = "SELECT count(*) AS number FROM (".$sql.") AS number";
+		$result = db_mysql_query($sql, $conn);
+		$arr_count = db_mysql_fetch_array($result);
+		$count = $arr_count['number'];
+		$start = $sub_page * $limit - $limit;
+		$pages = $count / $limit;
+		$sql = $save_sql;
+		$sql.=" LIMIT ".$start.", $limit";
+	}
 	return $sql;
 }
 ?>
