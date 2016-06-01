@@ -48,7 +48,7 @@ function thead($params){
 }
 
 function tbody($params){
-	global $conn, $modul, $sub_page;
+	global $conn, $modul, $sub_page, $pages;
 	if (!isset($sub_page) OR $sub_page == 0) $sub_page = 1;
 	if ($modul == 'content_tree'){
 		if (isset($params['FILTER'])) $arr_tmp = create_tree('content_tree', 0, $params['FILTER']);
@@ -109,20 +109,22 @@ function tbody($params){
 				$tbody .= "</div><!-- /.table-cell -->";
 			}
 			$tbody .= "</div><!-- /.table-row -->";
+		}
+		if (ceil($pages) != $sub_page){
 			$next_page = $sub_page+1;
 			$tbody .= "<form id='next_rows' method='POST'>";
 			$tbody .= "<input type='hidden' name='modul' value='".$modul."'>";
 			$tbody .= "<input type='hidden' name='params' value='".serialize($params)."'>";
 			$tbody .= "<input type='hidden' name='sub_page' value='".$next_page."'>";
 			$tbody .= "</form>";
-			$tbody .= "</div><!-- /.table-body -->";
 		}
+		$tbody .= "</div><!-- /.table-body -->";
 	}
 	if (isset($tbody)) print $tbody;
 }
 
 function select_tbody($params, $order, $filter = NULL, $group_by = NULL, $add = NULL, $limit = NULL){
-	global $modul, $conn, $sub_page;
+	global $modul, $conn, $sub_page, $pages;
 	$i = 0;
 	$z = count($params);
 	
@@ -176,7 +178,7 @@ function select_tbody($params, $order, $filter = NULL, $group_by = NULL, $add = 
 		$start = $sub_page * $limit - $limit;
 		$pages = $count / $limit;
 		$sql = $save_sql;
-		$sql.=" LIMIT ".$start.", $limit";
+		$sql.=" LIMIT ".$start.", ".$limit;
 	}
 	return $sql;
 }
