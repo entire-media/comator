@@ -66,6 +66,7 @@ if (isset($_POST['cmt_next'])) {
 			$_POST['c_active'] = 1;
 			
 			include(BACKEND."/setup/cmt_settings.php");
+			include(BACKEND."/setup/cmt_modul.php");
 			include(BACKEND."/setup/cmt_accounts.php");
 			include(BACKEND."/setup/cmt_labels.php");
 			include(BACKEND."/setup/languages.php");
