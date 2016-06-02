@@ -204,6 +204,22 @@ main { margin-right: 20px; padding-top: 20px;}
 .filter-form .form .multi_checkbox:nth-child(4n+6) { margin-left: 250px; }
 
 /* ================================================================ *\
+	#Update
+\* ================================================================ */
+
+.update { border-left: 1px solid #222933; border-right: 1px solid #222933; border-bottom: 1px solid #222933; margin-top: 20px; }
+.update .update-head { font-size: 16px; padding: 10px 0 10px 10px; background-color: #222933; color: #ffffff; }
+
+.update .update-content { padding: 0 20px 20px 20px;  background-color: #eeeeee; color: #222933; font-size: 16px; }
+
+.update .update-content .update-title { border-bottom: 1px solid #dddddd; padding-top: 28px; }
+.update .update-content h3 { font-size: 16px; font-weight: bold; padding-left: 20px; }
+.update .update-content .update-title i { float: right; margin-right: 20px; }
+
+.update .update-content .form_submit { float: right; display: block; margin-top: 20px; }
+.update .update-content:after { clear: both; display: block; content: " "; }
+
+/* ================================================================ *\
 	#Table
 \* ================================================================ */
 

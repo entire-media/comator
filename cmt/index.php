@@ -69,8 +69,13 @@ if (isset($_POST['order'])) $order = parse($_POST['order'], 'string');
 if (isset($_POST['direction'])) $direction = parse($_POST['direction'], 'string');
 if (isset($_POST['popup'])) $popup = parse($_POST['popup'], 'int');
 
-if (!isset($modul)) $modul = 'content';
-if (!$modul OR $modul=='index') $modul = 'content';
+if (defined('CMT_DEFAULT_MODUL')){
+	if (!isset($modul)) $modul = CMT_DEFAULT_MODUL;
+	if (!$modul OR $modul=='index') $modul = CMT_DEFAULT_MODUL;
+} else {
+	if (!isset($modul)) $modul = 'content';
+	if (!$modul OR $modul=='index') $modul = 'content';
+}
 if (isset($modul)) $_SESSION['modul'] = $modul;
 if (!isset($direction)) $direction = "ASC";
 

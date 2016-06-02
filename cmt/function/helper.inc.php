@@ -91,8 +91,6 @@ function tree_nav_table($params, $title, $t_data, $parents = NULL, $i = 1, $id_p
 	return $tbody;
 }
 
-
-
 function show_filter($filter_array = NULL){
 	global $modul;
 	if (isset($filter_array)){

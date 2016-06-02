@@ -1,4 +1,6 @@
 <?php
+$setup_version = '1.00';
+
 if (!isset($_GET['step'])) {
 	$step = 1;
 	unset($_SESSION['structure_install'], $_SESSION['data_install'], $_SESSION['structure_modul_install'], $_SESSION['data_modul_install']);
@@ -63,6 +65,7 @@ if (isset($_POST['cmt_next'])) {
 			$_POST['c_editor'] = 1;
 			$_POST['c_active'] = 1;
 			
+			include(BACKEND."/setup/cmt_settings.php");
 			include(BACKEND."/setup/cmt_accounts.php");
 			include(BACKEND."/setup/cmt_labels.php");
 			include(BACKEND."/setup/languages.php");

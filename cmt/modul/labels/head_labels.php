@@ -18,8 +18,4 @@ print "
 		<a href='?modul=cmt_".$path."'><i class='icon-entry'></i>".v('CMT_TAB_CMT_LABELS')."</a>
 	</li><!-- /.tab -->
 </ul><!-- /.tabs -->";
-
-print "<div class='filter_box'></div>";
-
-
 ?>

@@ -25,6 +25,28 @@ function load_cmt_scripts(){
 	require_once BACKEND.'function/chart.inc.php';
 }
 
+##### CHECK VERSION #####
+function check_version(){
+	global $conn;
+	$files = glob(BACKEND.'modul/update/CMT_CORE_*.zip');
+	if ($files){
+		foreach ($files AS $file){
+			preg_match("/CMT_CORE_(.*).zip/i", $file, $version);
+			if ($version[1]) $new_version = $version[1];
+		}
+	}
+	$sql = "SELECT value FROM ".$_SESSION['TABLE_PREFIX']."cmt_settings WHERE title = 'version_core' AND c_active = '1'";
+	$result=db_mysql_query($sql,$conn);
+	if (db_mysql_num_rows($result)){
+		$arr=db_mysql_fetch_array($result);
+		if (!isset($new_version)) $new_version = file_get_contents('http://update.comator.org/check_version.php?type=core&current_version='.$arr['value']);
+		if (isset($new_version) && $new_version){
+			$sql = "UPDATE ".$_SESSION['TABLE_PREFIX']."cmt_settings SET value = '".$new_version."', c_active = '1' WHERE title = 'update_core' ";
+			db_mysql_query($sql,$conn);
+		}
+	}
+}
+
 ##### LOGIN USER #####
 function do_login(){
 	global $conn;
@@ -78,6 +100,7 @@ function do_logout(){
 function define_user(){
 	global $conn;
 	if (isset($_SESSION['cmt_login']) && $_SESSION['cmt_login'] === true){
+		check_version();
 		$sql = "SELECT * FROM ".$_SESSION['TABLE_PREFIX']."cmt_accounts WHERE id = '".$_SESSION['cmt_id']."' AND c_active='1'";
 		$result=db_mysql_query($sql,$conn);
 		if (db_mysql_num_rows($result)){
@@ -86,6 +109,12 @@ function define_user(){
 			define('CMT_USER_FIRST_NAME', $arr['first_name']);
 			define('CMT_USER_LAST_NAME', $arr['last_name']);
 			define('CMT_USER_LANGUAGE', $arr['language']);
+			$sql_sub = "SELECT value FROM ".$_SESSION['TABLE_PREFIX']."cmt_settings WHERE title = 'default_modul' AND c_active = '1'";
+			$result_sub=db_mysql_query($sql_sub,$conn);
+			if (db_mysql_num_rows($result_sub)){
+				$arr_sub=db_mysql_fetch_array($result_sub);
+				define('CMT_DEFAULT_MODUL', $arr_sub['value']);
+			}
 		} else $_SESSION['cmt_login'] = false;
 	}
 	if (!defined('CMT_USER_LANGUAGE')) define('CMT_USER_LANGUAGE', 'en');

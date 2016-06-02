@@ -22,6 +22,4 @@ print "
 		<a href='?modul=".$path."_fields'><i class='icon-fields'></i>".v('CMT_TAB_FIELDS')."</a>
 	</li><!-- /.tab -->
 </ul><!-- /.tabs -->";
-
-print "<div class='filter_box'></div>";
 ?>
