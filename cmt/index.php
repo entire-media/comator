@@ -95,6 +95,8 @@ if ($path){
 	if ($path[1] == 'cmt') $path = $path[2];
 	else $path = $path[1];
 }	else $path = $modul;
+
+if (is_file(BACKEND.'modul/'.$path.'/'.$path.'.inc.php')) require_once BACKEND.'modul/'.$path.'/'.$path.'.inc.php';
 ?>
 <!doctype html>
 <html lang="de">
@@ -108,7 +110,7 @@ if ($path){
 	  <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 	  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic">
 	  <?php
-	  if (is_file('modul/'.$path.'/'.$path.'.css')) print '<link rel="stylesheet" type="text/css" href="modul/'.$path.'/'.$path.'.css">';
+	  if (is_file(BACKEND.'modul/'.$path.'/'.$path.'.css')) print '<link rel="stylesheet" type="text/css" href="'.BACKEND.'modul/'.$path.'/'.$path.'.css">';
 	  ?>
 	</head>
 	
@@ -164,7 +166,7 @@ if ($path){
 	  <script src="js/jquery-ui.min.js"></script>
 	  <script src="js/function.js"></script>
 	  <?php
-	  if (is_file('modul/'.$path.'/'.$path.'.js')) print '<link rel="stylesheet" type="text/css" href="modul/'.$path.'/'.$path.'.js">';
+	  if (is_file(BACKEND.'modul/'.$path.'/'.$path.'.js')) print '<link rel="stylesheet" type="text/css" href="'.BACKEND.'modul/'.$path.'/'.$path.'.js">';
 	  ?>
 	</body>
 </html>
