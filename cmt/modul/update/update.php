@@ -67,7 +67,8 @@ if ($update_core != 0){
 	if (isset($_POST['cmt_download'])) {
 		if (!is_file(BACKEND.'modul/update/CMT_CORE_'.$update_core.'.zip')){
 			print "<p>".v('CMT_DOWNLOADING_UPDATE')."</p>";
-			if (substr(get_headers('http://update.comator.org/core/CMT_CORE_'.$update_core.'.zip')[0], 9, 3) == '200'){
+			$headers = get_headers('http://update.comator.org/core/CMT_CORE_'.$update_core.'.zip');
+			if (substr($headers[0], 9, 3) == '200'){
 				$core_file = file_get_contents('http://update.comator.org/core/CMT_CORE_'.$update_core.'.zip');
 				$handle = fopen(BACKEND.'modul/update/CMT_CORE_'.$update_core.'.zip', 'w');
 				if (fwrite($handle, $core_file)) {

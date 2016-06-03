@@ -9,21 +9,19 @@
 #########################################################
 
 function db_mysql_connect($num=1){
-	$conns = parse_ini_file(FRONTEND.'config.inc.php');
+	$conns = parse_ini_file(FRONTEND.'config.inc.php', true);
 	$i=1;
 	foreach ($conns AS $key => $db){
-		if (strpos($key, 'conn') !== false) {
-			try {
-				if ($i==$num){
-					$dbh = $db['driver'].":host=".$db['host'].";dbname=".$db['dbname'];
-					$pd = new PDO($dbh, $db['user'], $db['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-					$pd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$pd->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-					return $pd;
-				}
-			} catch (PDOException $e) {
-				db_exception_log($e->getMessage());
+		try {
+			if ($i==$num){
+				$dbh = $db['driver'].":host=".$db['host'].";dbname=".$db['dbname'];
+				$pd = new PDO($dbh, $db['user'], $db['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+				$pd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$pd->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+				return $pd;
 			}
+		} catch (PDOException $e) {
+			db_exception_log($e->getMessage());
 		}
 		$i++;
 	}
