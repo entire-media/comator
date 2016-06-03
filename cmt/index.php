@@ -90,6 +90,11 @@ if (isset($start_export) && $start_export === true){
 	if (is_file(BACKEND.'export/export_'.$modul.'.php')) require_once BACKEND.'export/export_'.$modul.'.php';
 	die();
 }
+preg_match("/(.*)_(.*)/i", $modul, $path);
+if ($path){
+	if ($path[1] == 'cmt') $path = $path[2];
+	else $path = $path[1];
+}	else $path = $modul;
 ?>
 <!doctype html>
 <html lang="de">
@@ -102,6 +107,9 @@ if (isset($start_export) && $start_export === true){
 	  <link rel="stylesheet" type="text/css" href="css/icons.css">
 	  <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 	  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic">
+	  <?php
+	  if (is_file('modul/'.$path.'/'.$path.'.css')) print '<link rel="stylesheet" type="text/css" href="modul/'.$path.'/'.$path.'.css">';
+	  ?>
 	</head>
 	
 	<body>
@@ -122,11 +130,6 @@ if (isset($start_export) && $start_export === true){
 			?>
 			<main>
 			<?php
-				preg_match("/(.*)_(.*)/i", $modul, $path);
-				if ($path){
-					if ($path[1] == 'cmt') $path = $path[2];
-					else $path = $path[1];
-				}	else $path = $modul;
 				if (file_exists(BACKEND."/setup.php")){
 					include('setup.php');
 				} elseif (isset($_SESSION['cmt_login']) && $_SESSION['cmt_login'] === true){
@@ -160,5 +163,8 @@ if (isset($start_export) && $start_export === true){
 	  <script src="js/jquery-2.1.4.min.js"></script>
 	  <script src="js/jquery-ui.min.js"></script>
 	  <script src="js/function.js"></script>
+	  <?php
+	  if (is_file('modul/'.$path.'/'.$path.'.js')) print '<link rel="stylesheet" type="text/css" href="modul/'.$path.'/'.$path.'.js">';
+	  ?>
 	</body>
 </html>
