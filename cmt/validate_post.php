@@ -14,6 +14,16 @@ if (isset($_POST['date']) && isset($_POST['time'])){
 	unset($_POST['time']);
 }
 
+if (isset($_POST['date_start']) && isset($_POST['time_start'])){
+	$_POST['date_start']=strtotime($_POST['date_start']." ".$_POST['time_start']);
+	unset($_POST['time_start']);
+}
+
+if (isset($_POST['date_end']) && isset($_POST['time_end'])){
+	$_POST['date_end']=strtotime($_POST['date_end']." ".$_POST['time_end']);
+	unset($_POST['time_end']);
+}
+
 if (isset($modul) && $modul == "content_fields" && isset($_POST)){
 	foreach ($_POST AS $key => $val){
 		preg_match("/key_source_value_(.*)/i", $key, $source_value);
@@ -103,12 +113,17 @@ if (isset($_SESSION['filter'][$modul])){
 		preg_match("/(.*)_option_(.*)/i", $key, $option_key);
 		if ($activate_key){
 			$$key = $value;
-			if ($activate_key[2] == 'active') $value = 1;
-			if ($activate_key[2] == 'notactive')  $value = 0;
-			if (isset($data_array['FILTER']['activate'])){
-				$data_array['FILTER']['activate'] .= "OR c_active = '".$value."' ";
+			if (preg_match("/not/", $activate_key[2])){
+				$string = "c_".str_replace('not','',$activate_key[2]);
+				$value = 0;
 			} else {
-				$data_array['FILTER']['activate'] = "c_active = '".$value."' ";
+				$string = "c_".$activate_key[2];
+				$value = 1;
+			}
+			if (isset($data_array['FILTER']['activate'])){
+				$data_array['FILTER']['activate'] .= "OR ".$string." = '".$value."' ";
+			} else {
+				$data_array['FILTER']['activate'] = $string." = '".$value."' ";
 			}
 		} elseif ($option_key){
 			$$key = $value;
